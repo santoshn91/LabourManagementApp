@@ -1,0 +1,20 @@
+﻿@using LabourManagementApp.Models
+@model List<LabourViewModel>
+@{
+    ViewBag.title = "Bind Grid View";
+    WebGrid grid = new WebGrid(Model);
+}
+<h2>Labours in Grid View...</h2>
+@grid.GetHtml(columns: new[]
+{
+    grid.Column("Lid"),
+    grid.Column("Fname", header:"First Name"),
+    grid.Column("Lname", header:"Last Name"),
+    grid.Column("Gender"),
+    grid.Column("Age"),
+    grid.Column("Bg", header:"Blood Group"),
+    grid.Column("Number", header:"Phone Number"),
+    grid.Column(header: "Action",format:@<text>@Html.ActionLink("Delete", "/deletelabour/", new { id = item.Lid }, new{ onclick = "return confirm('Are you Sure!.')"})</text>),
+    grid.Column(header: "Action",format:@<text>@Html.ActionLink("Update", "/updatelabour/", new { id = item.Lid }, new{ onclick = "return confirm('Are you Sure!.')"})</text>)
+}, caption: "Labours")
+@Html.ActionLink("Create", "/createlabour")

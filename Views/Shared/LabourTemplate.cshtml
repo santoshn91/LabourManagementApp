@@ -1,0 +1,75 @@
+﻿@using LabourManagementApp.Models
+@model LabourViewModel
+
+
+<div>
+        @using (Html.BeginForm())
+        {
+    <table>
+        <tr>
+            <td></td>
+            <td>@Html.HiddenFor(x => x.Lid)</td>
+        </tr>
+        <tr>
+            <td>Fname:</td>
+            <td>
+                @Html.TextBoxFor(x => x.Fname)
+                @Html.ValidationMessageFor(x => x.Fname, "", new { style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>Lname:</td>
+            <td>
+                @Html.TextBoxFor(x => x.Lname)
+                @Html.ValidationMessageFor(x => x.Lname, "", new { Style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>Gender:</td>
+            <td>
+                @foreach (var item in Model.Genders)
+                {
+                    @Html.RadioButtonFor(x => x.Gender, item.name);
+                    @item.name
+                }
+                @Html.ValidationMessageFor(x => x.Gender, "", new { Style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>Age:</td>
+            <td>
+                @Html.TextBoxFor(x => x.Age)
+                @Html.ValidationMessageFor(x => x.Age, "", new { Style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>Bg:</td>
+            <td>
+                @Html.DropDownListFor(x => x.Bg, Model.Bgs)
+            </td>
+        </tr>
+        <tr>
+            <td>Number:</td>
+            <td>
+                @Html.TextBoxFor(x => x.Number)
+                @Html.ValidationMessageFor(x => x.Number, "", new { Style = "color:red" })
+            </td>
+        </tr>
+        <tr>
+            <td>Agree?</td>
+            <td>
+                @Html.CheckBoxFor(x => x.IsPolicyAccepted)
+                @Html.ActionLink("I accept the above terms and condions.", "")
+                @Html.ValidationMessageFor(x => x.IsPolicyAccepted, "", new { Style = "color:red"})
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit">Submit</button></td>
+        </tr>
+        <tr>
+            <td>@Html.ActionLink("Show Labours", "/getalllabours")</td>
+        </tr>
+    </table>
+        }
+</div>
